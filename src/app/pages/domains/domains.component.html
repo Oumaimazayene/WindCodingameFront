@@ -1,0 +1,108 @@
+<div class="pt-6 md-8"></div>
+<div class="container-fluid mt-5">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="d-flex align-items-center">
+            <i class="fa-brands fa-dev mr-2" style="font-size: 32px"></i>
+            <h2 class="mb-0 ml-2">Liste des Domaines</h2>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <div class="row">
+              <div class="col-auto">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Rechercher par nom..."
+                  [(ngModel)]="filterName"
+                  (input)="searchDomaines()"
+                />
+              </div>
+              <div class="col-auto">
+                <button
+                  type="button"
+                  class="add-bouton"
+                  (click)="openAddDomainDialog()"
+                >
+                  Ajouter Un Domaine
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Language</th>
+                <th scope="col">Version</th>
+                <th scope="col">Detailles</th>
+              </tr>
+            </thead>
+            <ng-container *ngIf="pagedDomaines.length === 0; else domain">
+              <tr>
+                <td colspan="5" style="text-align: center">
+                  <img
+                    src="../../../../../assets/img/brand/Questions-bro.png"
+                    alt="Image si le tableau est vide"
+                    style="width: 30%; height: 30%; display: inline-block"
+                  />
+                </td>
+              </tr>
+            </ng-container>
+            <ng-template #domain class="align-items-center">
+              <tbody>
+                <tr *ngFor="let domain of pagedDomaines">
+                  <td>{{ domain.name }}</td>
+                  <td>{{ domain.lang }}</td>
+                  <td>{{ domain.version }}</td>
+                  <td>
+                    <div class="row">
+                      <div
+                        class="col-4 clickable-icon"
+                        (click)="openUpdateDialog(domain)"
+                      >
+                        <i
+                          class="fa-regular fa-pen-to-square"
+                          style="font-size: 18px"
+                        ></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+
+          <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+              [collectionSize]="totalItems"
+              [(page)]="currentPage"
+              [pageSize]="pageSize"
+              (pageChange)="pageChanged($event)"
+            >
+              <ng-template ngbPageLink let-pageIndex="page">
+                <a class="page-link">{{ pageIndex }}</a>
+              </ng-template>
+            </ngb-pagination>
+
+            <select
+              class="form-select form-control"
+              style="width: auto"
+              [(ngModel)]="pageSize"
+              (ngModelChange)="refreshQuestion()"
+            >
+              <option [ngValue]="5">5 Domaines par page</option>
+              <option [ngValue]="10">10 Domaines par page</option>
+              <option [ngValue]="50">50 Domaines par page</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

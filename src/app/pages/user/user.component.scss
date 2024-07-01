@@ -1,0 +1,57 @@
+.verified-icon {
+  font-size: 24px; /* taille de l'icône */
+  color: green; /* couleur de l'icône */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px; /* largeur du cercle */
+  height: 32px; /* hauteur du cercle */
+  border-radius: 50%; /* pour arrondir les coins et créer un cercle */
+  background-color: rgba(
+    0,
+    128,
+    0,
+    0.1
+  ); /* couleur de fond pour un effet de cercle */
+}
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
+}
+.close-bouton {
+  color: #1c1c2b;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 15%;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: normal;
+
+  background-color: #eab308;
+}
+
+.close-bouton:hover {
+  background-color: #eab308;
+}
+.en-bouton {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 20%;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: normal;
+
+  background-color: #1c1c2b;
+}
+
+.close-bouton:hover {
+  background-color: #eab308;
+}

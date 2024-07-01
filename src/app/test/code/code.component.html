@@ -1,0 +1,12 @@
+<!-- code.component.html -->
+
+<div #editor style="width: 600px; height: 400px"></div>
+<button (click)="runCode()">Run Code</button>
+
+<div *ngIf="response">
+  <h3>Output:</h3>
+  <p>{{ response.output }}</p>
+  <p>Status Code: {{ response.statusCode }}</p>
+  <p>Memory: {{ response.memory }}</p>
+  <p>CPU Time: {{ response.cpuTime }}</p>
+</div>

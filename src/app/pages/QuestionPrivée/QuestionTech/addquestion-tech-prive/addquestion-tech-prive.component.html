@@ -1,0 +1,230 @@
+<div class="mt-2">
+  <form #questionForm="ngForm" (ngSubmit)="addQuestion(questionForm)">
+    <div class="d-flex justify-content-end mb-3">
+      <i
+        class="fas fa-times"
+        (click)="closeDialog()"
+        style="font-size: 18px; cursor: pointer"
+      ></i>
+    </div>
+    <mat-horizontal-stepper #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Informations générales</ng-template>
+
+        <div *ngIf="!showAnswersInput">
+          <h1>Nouvelle question technique</h1>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="title">Titre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+                [(ngModel)]="newQuestion.title"
+              />
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="type">Type</label>
+                  <select
+                    class="form-select form-control"
+                    id="type"
+                    name="type"
+                    required
+                    [(ngModel)]="newQuestion.type_id"
+                    (change)="updateTypeId($event.target.value)"
+                  >
+                    <option *ngFor="let type of types" [value]="type.id">
+                      {{ type.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="domaine">Domaine</label>
+                  <select
+                    class="form-select form-control"
+                    id="domaine"
+                    name="domaine"
+                    required
+                    [(ngModel)]="newQuestion.domain_id"
+                    (change)="updateDomainId($event.target.value)"
+                  >
+                    <option
+                      *ngFor="let domaine of domaines"
+                      [value]="domaine.id"
+                    >
+                      {{ domaine.name }}......{{ domaine.version }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="questionBody">Contenu de Question</label>
+              <textarea
+                class="form-control"
+                id="questionBody"
+                rows="3"
+                placeholder="Question Body ..."
+                [(ngModel)]="newQuestion.questionBody"
+                name="questionBody"
+                required
+              ></textarea>
+            </div>
+            <div class="col-md-4 mb-3 mt-3">
+              <label for="time">Durée</label>
+              <input
+                type="text"
+                class="form-control"
+                id="time"
+                name="time"
+                required
+                [(ngModel)]="newQuestion.time"
+              />
+            </div>
+            <div class="col-md-4 mb-3 mt-3">
+              <label for="score">Score</label>
+              <input
+                type="text"
+                class="form-control"
+                id="score"
+                name="score"
+                required
+                [(ngModel)]="newQuestion.score"
+              />
+            </div>
+            <div class="col-md-4 mb-3 mt-3">
+              <label for="difficulty">Difficulté</label>
+              <select
+                class="form-select form-control"
+                id="difficulty"
+                name="difficulty"
+                required
+                [(ngModel)]="newQuestion.difficulty"
+              >
+                <option
+                  *ngFor="let difficulty of difficulties"
+                  [value]="difficulty"
+                >
+                  {{ difficulty }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-right">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            matStepperNext
+            *ngIf="!showAnswersInput"
+          >
+            Suivant
+          </button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Ajouter des Réponses</ng-template>
+        <div class="card card-main">
+          <div class="card-header">
+            <span>
+              <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+              <strong> Ajouter des Réponses </strong>
+            </span>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="submitAndAddAnswer()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="mb-3">
+                    <label for="newAnswer">Ajouter une réponse</label>
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="newAnswer"
+                        name="newAnswer"
+                        [(ngModel)]="newAnswer"
+                      />
+                      <div class="input-group-append">
+                        <a
+                          class="input-group-text"
+                          (click)="submitAndAddAnswer()"
+                        >
+                          <i
+                            class="fa-regular fa-square-plus"
+                            style="font-size: 18px; cursor: pointer"
+                          ></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label>Réponses enregistrées : cocher la bonne réponse</label>
+                  <ul>
+                    <li *ngFor="let answer of submittedAnswers; let i = index">
+                      <div
+                        class="custom-control custom-checkbox d-flex justify-content-between"
+                      >
+                        <div>
+                          <input
+                            class="custom-control-input"
+                            type="checkbox"
+                            id="answer{{ i }}"
+                            [(ngModel)]="newQuestion.answer[i].isTrue"
+                          />
+                          <label
+                            class="custom-control-label"
+                            for="answer{{ i }}"
+                            >{{ answer }}</label
+                          >
+                        </div>
+                        <div
+                          type="button"
+                          class="btn-secondary"
+                          (click)="removeAnswer(i)"
+                          style="font-size: 20px"
+                        >
+                          <i class="fas fa-trash-alt"></i>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row mt-3 justify-content-center"></div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-12 text-left mt-2">
+          <button
+            type="button"
+            class="btn btn-secondary ml-2"
+            (click)="stepper.previous()"
+          >
+            Précédent
+          </button>
+        </div>
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn en-bouton">Enregistrer</button>
+          <button
+            type="button"
+            class="btn close-bouton"
+            (click)="closeDialog()"
+          >
+            Annuler
+          </button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+</div>

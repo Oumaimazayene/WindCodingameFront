@@ -1,0 +1,18 @@
+<div *ngIf="!isLoading">
+  <h2 mat-dialog-title>Confirmation de validation</h2>
+  <div mat-dialog-content>
+    <h3>Êtes-vous sûr de vouloir valider cet utilisateur ?</h3>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="en-bouton mr-2" (click)="onConfirm()">
+      Confirmer
+    </button>
+    <button mat-button [mat-dialog-close]="false" class="close-bouton">
+      Annuler
+    </button>
+  </div>
+</div>
+
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>

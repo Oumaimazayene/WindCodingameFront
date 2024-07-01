@@ -1,0 +1,109 @@
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000; /* Couleur de l'icône */
+  font-size: 24px; /* Taille de l'icône */
+}
+
+.circle-arrow1 {
+  width: 50px;
+  height: 50px;
+  background-color: #eab308;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  &:hover {
+    background-color: darken(#050a24, 10%);
+  }
+}
+.circle-arrow2 {
+  width: 50px;
+  height: 50px;
+  background-color: #eab308;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+
+  &:hover {
+    background-color: darken(
+      #050a24,
+      10%
+    ); // Assombrir légèrement la couleur au survol
+  }
+}
+.next-bouton {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+
+  background-color: #eab308;
+}
+.close-bouton {
+  color: #1c1c2b;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+
+  background-color: #eab308;
+}
+
+.close-bouton:hover {
+  background-color: #eab308;
+}
+.en-bouton {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+
+  background-color: #1c1c2b;
+}
+
+.close-bouton:hover {
+  background-color: #eab308;
+}
+.title {
+  color: #1c1c2b;
+}
+
+.reponse-bouton {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+
+  background-color: #000427;
+}

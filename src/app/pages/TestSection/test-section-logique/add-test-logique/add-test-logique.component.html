@@ -1,0 +1,71 @@
+<div>
+  <div class="d-flex justify-content-end mb-3" (click)="closeDialog()">
+    <i class="fas fa-times" style="font-size: 18px; cursor: pointer"></i>
+  </div>
+  <h2>Créer un nouveau test logique</h2>
+
+  <form [formGroup]="newTestLogForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="size">Nombre de questions publiques :</label>
+      <input
+        type="number"
+        class="form-control"
+        id="size"
+        formControlName="size"
+        aria-label="Nombre de questions publiques"
+        aria-describedby="size-error"
+      />
+      <div
+        *ngIf="
+          newTestLogForm.get('size').invalid &&
+          newTestLogForm.get('size').touched
+        "
+        class="text-danger"
+        id="size-error"
+      >
+        Le nombre de questions publiques est requis et doit être supérieur ou
+        égal à zéro.
+      </div>
+    </div>
+    <div>
+      <label for="privateqts">Nombre de questions privées :</label>
+      <input
+        type="number"
+        class="form-control"
+        id="privateqts"
+        formControlName="privateqts"
+        aria-label="Nombre de questions privées"
+        aria-describedby="privateqts-error"
+      />
+      <div
+        *ngIf="
+          newTestLogForm.get('privateqts').invalid &&
+          newTestLogForm.get('privateqts').touched
+        "
+        class="text-danger"
+        id="privateqts-error"
+      >
+        Le nombre de questions privées est requis et doit être supérieur ou égal
+        à zéro.
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-auto">
+        <div *ngIf="errorMessage" class="alert text-danger">
+          {{ errorMessage }}
+        </div>
+
+        <button
+          type="submit"
+          class="btn en-bouton"
+          [disabled]="newTestLogForm.invalid"
+        >
+          Enregistrer
+        </button>
+        <button type="button" class="btn close-bouton" (click)="closeDialog()">
+          Annuler
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

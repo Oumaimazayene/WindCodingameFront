@@ -1,0 +1,36 @@
+<h2 mat-dialog-title class="dialog-title">
+  <span>Nouveau Type</span>
+</h2>
+<i class="fas fa-times-circle close-icon" (click)="closeDialog()"></i>
+<div mat-dialog-content>
+  <form #typeForm="ngForm" (ngSubmit)="addType(typeForm)">
+    <div class="row">
+      <!-- Champ "name" -->
+      <div class="col-md-6 mb-3">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="newType.name"
+          name="name"
+          required
+        />
+      </div>
+      <!-- Champ "lang" -->
+      <div class="col-md-3 mt-4">
+        <div class="col-auto">
+          <button type="submit" class="add-bouton mr-2">Enregistrer</button>
+        </div>
+      </div>
+      <!-- Champ "version" -->
+      <div class="col-md-3 mt-4">
+        <div class="col-auto">
+          <button type="button" class="annule-bouton" (click)="closeDialog()">
+            Annuler
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

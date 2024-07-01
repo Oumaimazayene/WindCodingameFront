@@ -1,0 +1,43 @@
+.limited-size {
+  max-width: 600px;
+  max-height: 100px;
+}
+
+body {
+  cursor: not-allowed;
+}
+
+.text-white {
+  user-select: none;
+}
+.text2 {
+  color: #efcc0b;
+}
+.gbgradien {
+  background-image: linear-gradient(
+      45deg,
+      rgb(5, 10, 36, 0.9) 10%,
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("../../../assets/img/brand/hiring.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.button-yellow {
+  background-color: #efcc0b;
+  color: #1c1c2b;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 9999px;
+}
+
+.button-yellow:hover {
+  background-color: goldenrod;
+}

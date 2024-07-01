@@ -1,0 +1,296 @@
+<mat-toolbar>
+  <img src="../../../assets/img/brand/red.png" alt="" class="toolbar-logo" />
+  <span class="toolbar-space"></span>
+</mat-toolbar>
+<!-- <div class="text-center mt-5" *ngIf="!testStarted">
+  <div class="col-md-12">
+    <img
+      src="../../../assets/img/brand/start.png"
+      class="img-fluid"
+      style="max-width: 300px; height: auto"
+    />
+  </div>
+  <div>
+    <button class="add-bouton mt-2" (click)="startTest()">Start Test</button>
+  </div>
+  <div class="mt-2">
+    <h2>Durée Totale de Test : {{ formatTime(timetotal) }}</h2>
+  </div>
+</div> -->
+
+<ng-container *ngIf="!alreadySubmitted">
+  <ng-container *ngIf="!ended" class="unselectable">
+    <div class="left">
+      <div class="row header class-hedaer" *ngIf="currentQuestion">
+        <div class="col-md-6">
+          <span class="question-num">
+            <i class="fa fa-question-circle" aria-hidden="true"></i> Question
+            {{ currentQuestionIndex + 1 }} / {{ questionList.length }}
+          </span>
+        </div>
+        <div class="col-md-6 text-right">
+          <span
+            class="elapsed-time"
+            [ngStyle]="{ color: counter <= 10000 ? 'red' : 'inherit' }"
+          >
+            <i class="fas fa-stopwatch"></i> Temps écoulé :
+          </span>
+          <countdown
+            [config]="{
+              leftTime: counter,
+              format: 'mm:ss',
+              notify: 10
+            }"
+            (event)="onTimerFinished($event)"
+            [ngStyle]="{ color: counter <= 10000 ? 'red' : 'inherit' }"
+          ></countdown>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="currentQuestion">
+        <div class="card-header">
+          <h2 class="card-title">
+            {{ currentQuestion.questionBody }}
+          </h2>
+        </div>
+
+        <div
+          class="card-body d-flex justify-content-center align-items-center"
+          *ngIf="currentQuestion"
+        >
+          <div class="mt-3">
+            <ng-container *ngIf="currentQuestion.urlimage">
+              <img
+                [src]="
+                  'http://localhost:8070/image/' + currentQuestion.urlimage
+                "
+                alt="Question Image"
+                class="img-fluid"
+              />
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row mb-3 font-weight-light mt-1">
+        <div class="col-md-12">
+          <div *ngIf="questionType === 'code'">
+            <div class="card" style="border: 2px solid #8898aa">
+              <div class="card-header">
+                <h4 class="mb-0">
+                  <i class="fa fa-eye mr-2" aria-hidden="true"></i>
+                  Console output
+                </h4>
+              </div>
+              <div class="card-body" *ngIf="response" style="color: black">
+                <h3 class="card-title">Output:</h3>
+                <p class="card-text">{{ response.output }}</p>
+                <p class="card-text">Status Code: {{ response.statusCode }}</p>
+                <p class="card-text">Memory: {{ response.memory }}</p>
+                <p class="card-text">CPU Time: {{ response.cpuTime }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="row class-hedaer">
+        <div class="col-md-4">
+          <span class="question-num">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            Réponses
+          </span>
+        </div>
+      </div>
+      <div
+        class="body"
+        *ngIf="
+          currentQuestion && (questionType === 'qcu' || questionType === 'qcm')
+        "
+        style="cursor: pointer"
+      >
+        <strong *ngIf="questionType === 'qcu'"
+          >Sélectionnez votre réponse :</strong
+        >
+        <strong *ngIf="questionType === 'qcm'"
+          >Sélectionnez votre(s) réponse(s) :</strong
+        >
+        <div
+          class="row answer-list"
+          *ngFor="let item of currentQuestion?.answer; let i = index"
+        >
+          <div class="col-md-1">{{ i + 1 }}-</div>
+          <div class="col-md-7">
+            <span>{{ item.answer }}</span>
+          </div>
+          <div class="col-md-4 text-right">
+            <div class="form-check form-check-inline" style="cursor: pointer">
+              <input
+                class="form-check-input"
+                [type]="questionType === 'qcu' ? 'radio' : 'checkbox'"
+                [id]="'answer_' + i"
+                [name]="'answer'"
+                [value]="item"
+                (change)="
+                  questionType === 'qcu'
+                    ? checkCheckBoxvalue($event, item, i)
+                    : checkCheckBoxvalueQCM($event, item, i)
+                "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="body" [hidden]="questionType !== 'code' || !isEditorVisible">
+        <div id="editor" #editor style="height: 350px"></div>
+        <div class="mt-3">
+          <button class="col-3 add-bouton" (click)="runCode()">
+            <i class="fa fa-play-circle" aria-hidden="true"></i> Run Your Code
+          </button>
+        </div>
+      </div>
+
+      <div class="body" *ngIf="questionType === 'Text'">
+        <div class="row class-hedaer">
+          <div class="col-md-4">
+            <span class="question-num">
+              <i class="fa fa-reply" aria-hidden="true"></i>
+              Réponses
+            </span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row">
+            <textarea
+              name="answer"
+              id=""
+              cols="30"
+              rows="5"
+              class="form-control"
+              [(ngModel)]="textAnswer.answer"
+            ></textarea>
+          </div>
+          <div class="row">
+            <button
+              type="button"
+              class="btn btn-warning next-btn"
+              *ngIf="!isCompleted"
+              (click)="textSubmit()"
+              (click)="submitQuestion()"
+            >
+              <i
+                class="fa fa-chevron-circle-right text-dark"
+                aria-hidden="true"
+              ></i>
+              Next Question
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning next-btn"
+              *ngIf="isCompleted"
+              (click)="textSubmit()"
+              (click)="submitQuestion()"
+            >
+              <i
+                class="fa fa-chevron-circle-right text-dark"
+                aria-hidden="true"
+              ></i>
+              submit test
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center btn-row">
+        <button
+          type="button"
+          class="btn next-btn"
+          *ngIf="!isCompleted"
+          (click)="goToNextQuestion()"
+        >
+          <i
+            class="fa fa-chevron-circle-right text-dark"
+            aria-hidden="true"
+          ></i>
+          Question Suivante
+        </button>
+        <button
+          type="button"
+          class="btn next-btn"
+          *ngIf="allQuestionsAnswered && !alreadySubmitted"
+          (click)="testSubmit(); endTest()"
+        >
+          <i
+            class="fa fa-chevron-circle-right text-dark"
+            aria-hidden="true"
+          ></i>
+          Soumettre le Test
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="ended">
+    <div class="container">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6">
+            <h1>Test Completed!</h1>
+            <br />
+            <h3>Your test has been submitted successfully!</h3>
+            <br />
+            <button type="button" class="add-bouton" (click)="generateReport()">
+              See your test report!
+            </button>
+            <div *ngIf="successMessage" class="success-message">
+              {{ successMessage }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="alreadySubmitted">
+  <div class="container container-submitted">
+    <div class="card">
+      <div class="card-header">
+        <span
+          ><i class="fa-solid fa-triangle-exclamation"></i> Consultez Votre
+          Email
+        </span>
+      </div>
+      <div class="card-body text-center">
+        <div class="row">
+          <div class="col-md-12">
+            <span class="text-left"
+              ><i class="fa-solid fa-circle-exclamation mr-2"></i>Ce test est
+              Déjà soumis !</span
+            >
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <span class="text-right"
+              >Si vous n’avez pas soumis votre test, veuillez vérifier le lien
+              dans votre Email
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row justify-content-center">
+              <img
+                src="../../../assets/img/brand/online.png"
+                class="img-fluid"
+                style="max-width: 300px; height: auto"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,12 @@
+.limited-size {
+  max-width: 600px;
+  max-height: 100px;
+}
+
+body {
+  cursor: not-allowed;
+}
+
+.text-white {
+  user-select: none;
+}

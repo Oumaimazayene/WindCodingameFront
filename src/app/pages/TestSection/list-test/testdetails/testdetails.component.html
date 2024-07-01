@@ -1,0 +1,84 @@
+<div class="pt-6 md-8"></div>
+<div class="container-fluid mt-5">
+  <div class="header-body"></div>
+</div>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card shadow">
+        <div class="card-header" style="background-color: #1c1c2b">
+          <div class="row align-items-center">
+            <div class="col">
+              <h1 class="mb-0 text-white">Rapport de Test</h1>
+            </div>
+            <div class="col-auto">
+              <img
+                src="../../../../../assets/img/brand/red.png"
+                alt="Votre logo"
+                class="img-fluid"
+                style="max-width: 100px"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="test">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <i class="ni ni-badge mr-3" style="font-size: 32px"></i>
+              <div>
+                <h1 class="mb-0 text-default">
+                  {{ test.candidate.firstName }} {{ test.candidate.lastName }}
+                </h1>
+                <span>{{ test.candidate.email }}</span>
+              </div>
+            </div>
+            <div class="d-flex flex-column align-items-start">
+              <div class="d-flex align-items-center mr-2">
+                <i class="fas fa-medal mr-2"></i>
+                <h2 class="mb-0">Score Totale : {{ test.scoreTotale }}</h2>
+              </div>
+              <div class="d-flex align-items-center mr-2">
+                <i class="fas fa-trophy mr-2"></i>
+                <h2 class="mb-0">Score Finale : {{ test.scorefinale }}</h2>
+              </div>
+              <div class="d-flex align-items-center mr-2">
+                <h2 class="mb-0">
+                  <i class="fa-solid fa-check mr-2"></i>
+                  Réponses correcte : {{ test.correctAnswerCount }}
+                </h2>
+              </div>
+              <div class="d-flex align-items-center mr-2">
+                <i class="fa-solid fa-arrow-up-right-dots mr-2"></i>
+                <h2 class="mb-0">Taux de Success : {{ test.successRate }} %</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center mt-2">
+            <i class="fas fa-calendar-alt fa-2x mr-2"></i>
+            <div>
+              <h3 class="mb-0">
+                Date de soumission : {{ formatDate(test.submittedDate) }}
+              </h3>
+            </div>
+          </div>
+          <hr />
+          <div>
+            <div *ngFor="let question of test.questions; let i = index">
+              <h2 style="color: #1c1c2b">
+                Question {{ i + 1 }}- {{ question.title }}
+              </h2>
+              <p>{{ question.questionBody }}</p>
+              <ul *ngFor="let answer of question.answer">
+                <li *ngIf="answer.isTrue">
+                  <h3 class="text-success">{{ answer.answer }}</h3>
+                </li>
+              </ul>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

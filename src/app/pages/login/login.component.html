@@ -1,0 +1,121 @@
+<div #alertContainer></div>
+<div class="container pt-4 pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-transparent pb-5">
+          <div class="text-muted text-center mt-2 mb-3">
+            <h1>Connectez-vous à votre compte</h1>
+            <p class="my-2 text-center">
+              Vous n'avez pas de compte ?
+              <a class="ml-1 text-500 underline mb-10" href="#/register"
+                >Inscrivez-vous</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <form (ngSubmit)="login()" [formGroup]="form" role="form">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-email-83"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  formControlName="email"
+                  placeholder="Email"
+                  type="email"
+                  aria-label="Email"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-lock-circle-open"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  formControlName="password"
+                  placeholder="Password"
+                  type="password"
+                  aria-label="Password"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="togglePasswordVisibility('password')"
+                  >
+                    <i
+                      class="fa"
+                      [ngClass]="{
+                        'fa-eye': showPassword,
+                        'fa-eye-slash': !showPassword
+                      }"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  loginError &&
+                  (form.controls['password'].touched ||
+                    form.controls['email'].touched)
+                "
+                class="text-danger"
+              >
+                {{ loginError }}
+              </div>
+            </div>
+            <div
+              class="custom-control custom-control-alternative custom-checkbox"
+            >
+              <input
+                class="custom-control-input"
+                id="customCheckLogin"
+                type="checkbox"
+              />
+              <label class="custom-control-label" for="customCheckLogin"
+                ><span class="text-muted">Remember me</span></label
+              >
+            </div>
+            <div class="text-center mt-3">
+              <button
+                class="md:w-full rounded-full button-yellow col-lg-10"
+                type="submit"
+                [disabled]="form.invalid || form.pristine"
+              >
+                <span>Se connecter </span>
+              </button>
+            </div>
+            <div class="text-center mt-4">
+              <a
+                class="text-sm font-medium underline"
+                [routerLink]="['/reset-password']"
+              >
+                Mot de passe oublié ?
+              </a>
+            </div>
+
+            <div
+              class="row justify-content-center mt-4"
+              *ngIf="form.invalid && (form.dirty || form.touched)"
+            >
+              <div class="col-lg-12">
+                <div class="text-danger" role="alert">
+                  Veuillez remplir tous les champs correctement.
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

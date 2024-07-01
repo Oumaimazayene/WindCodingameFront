@@ -1,0 +1,77 @@
+.circle-arrow1 {
+  width: 50px;
+  height: 50px;
+  background-color: #eab308;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  &:hover {
+    background-color: darken(
+      #050a24,
+      10%
+    ); // Assombrir légèrement la couleur au survol
+  }
+}
+.circle-arrow2 {
+  width: 50px;
+  height: 50px;
+  background-color: #eab308;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+
+  &:hover {
+    background-color: darken(
+      #050a24,
+      10%
+    ); // Assombrir légèrement la couleur au survol
+  }
+}
+
+.circle-arrow i {
+  color: white;
+  font-size: 24px;
+}
+.question-image {
+  width: 200px; /* Modifier la largeur selon vos besoins */
+  height: 200px; /* Garder la même valeur que la largeur pour obtenir un carré */
+  object-fit: cover; /* Pour s'assurer que l'image remplisse complètement la zone définie */
+  border-radius: 10px; /* Ajouter une bordure arrondie si nécessaire */
+}
+/* Style du bouton de fermeture */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000; /* Couleur de l'icône */
+  font-size: 24px; /* Taille de l'icône */
+}
+/* Ajoutez ces styles pour rendre le contenu du MatDialog scrollable */
+.scrollable-dialog-content {
+  max-height: 500px;
+  overflow-y: auto;
+}
+.custom-width {
+  width: 100%; /* Largeur maximale */
+  max-width: 800px; /* Largeur maximale */
+}
+
+.custom-image {
+  width: 70%; /* Largeur maximale */
+  max-width: 200px; /* Largeur maximale */
+}

@@ -1,0 +1,235 @@
+<div class="container pt-2 pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-transparent pb-5">
+          <div class="text-muted text-center mt-2 mb-3">
+            <h1>Inscrivez-vous</h1>
+            <p class="my-2 ng-tns-c331-7 text-center">
+              Vous avez déjà un compte ?
+              <a
+                class="ml-1 text-500 underline mb-10 ng-tns-c331-7"
+                href="#/login"
+                >Connectez-vous</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <form role="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa-solid fa-user"></i>
+                  </span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="First Name"
+                  type="text"
+                  formControlName="firstname"
+                />
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('firstname').invalid &&
+                  (registerForm.get('firstname').dirty ||
+                    registerForm.get('firstname').touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="registerForm.get('firstname').errors.required">
+                  Le prénom est requis.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa-solid fa-user"></i>
+                  </span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Last Name"
+                  type="text"
+                  formControlName="lastname"
+                />
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('lastname').invalid &&
+                  (registerForm.get('lastname').dirty ||
+                    registerForm.get('lastname').touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="registerForm.get('lastname').errors.required">
+                  Le nom de famille est requis.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa-solid fa-phone"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Phone Number"
+                  type="tel"
+                  formControlName="numtel"
+                />
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('numtel').invalid &&
+                  (registerForm.get('numtel').dirty ||
+                    registerForm.get('numtel').touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="registerForm.get('numtel').errors.required">
+                  Le numéro de téléphone est requis.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-building"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Company Name"
+                  type="text"
+                  formControlName="societyName"
+                />
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('societyName').invalid &&
+                  (registerForm.get('societyName').dirty ||
+                    registerForm.get('societyName').touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="registerForm.get('societyName').errors.required">
+                  Le nom de la société est requis.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa-solid fa-circle-dollar-to-slot"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Matricule fiscale"
+                  type="text"
+                  formControlName="matricule_fiscale"
+                />
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('matricule_fiscale').invalid &&
+                  (registerForm.get('matricule_fiscale').dirty ||
+                    registerForm.get('matricule_fiscale').touched)
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="registerForm.get('matricule_fiscale').errors.required"
+                >
+                  Le matricule fiscale est requis.
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-email-83"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Email"
+                  type="email"
+                  formControlName="email"
+                />
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('email').invalid &&
+                  (registerForm.get('email').dirty ||
+                    registerForm.get('email').touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="registerForm.get('email').errors.required">
+                  L'email est requis.
+                </div>
+                <div *ngIf="registerForm.get('email').errors.email">
+                  L'email doit être valide.
+                </div>
+              </div>
+            </div> -->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="ni ni-email-83"></i>
+                  </span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Email"
+                  type="email"
+                  formControlName="email"
+                />
+              </div>
+              <div
+                *ngIf="
+                  registerForm.get('email').invalid &&
+                  (registerForm.get('email').dirty ||
+                    registerForm.get('email').touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="registerForm.get('email').errors?.required">
+                  L'email est requis.
+                </div>
+                <div *ngIf="registerForm.get('email').errors?.email">
+                  L'email doit être valide.
+                </div>
+                <div *ngIf="registerForm.get('email').errors?.emailTaken">
+                  Cet email est déjà utilisé.
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mt-3">
+              <button
+                class="md:w-full rounded-full button-yellow col-lg-10"
+                type="submit"
+                [disabled]="registerForm.invalid || registerForm.pristine"
+              >
+                <span>S'inscrire</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

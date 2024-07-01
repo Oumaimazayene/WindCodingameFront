@@ -1,0 +1,217 @@
+<div class="pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-4 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Question Technique
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0">{{
+                    technicalQuestionsCount
+                  }}</span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-default text-white rounded-circle shadow"
+                  >
+                    <i class="fa-regular fa-file-code"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-nowrap"
+                  >Voir plus
+                  <i
+                    class="fa-solid fa-arrow-down-short-wide text-defaultl-2 ml-2"
+                    style="font-size: 18px"
+                  ></i
+                ></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Domaines
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0">{{
+                    domainsCount
+                  }}</span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-default text-white rounded-circle shadow"
+                  >
+                    <i class="fa-brands fa-java"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-nowrap"
+                  >Voir plus
+                  <i
+                    class="fa-solid fa-arrow-down-short-wide text-defaultl-2 ml-2"
+                    style="font-size: 18px"
+                  ></i
+                ></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="d-flex align-items-center">
+            <i class="fa-solid fa-question mr-2" style="font-size: 20px"></i>
+            <h2 class="mb-0">Questions Techniques publique</h2>
+            <div class="ml-auto">
+              <button
+                type="button"
+                class="add-bouton"
+                (click)="openAddQuestionTechDialog()"
+              >
+                Ajouter
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end align-items-center mt-2 mb-0">
+            <div class="mr-3" style="width: 150px">
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>Filtrer par Type :</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="filterType"
+                  (input)="filterQuestion()"
+                  placeholder="Entrez le type..."
+                />
+              </mat-form-field>
+            </div>
+            <div class="mr-3" style="width: 150px">
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>Filtrer par Difficulté :</mat-label>
+                <mat-select
+                  [(ngModel)]="filterDifficulty"
+                  (selectionChange)="filterQuestion()"
+                >
+                  <mat-option [value]="''"
+                    >-- Sélectionner la difficulté --</mat-option
+                  >
+                  <mat-option
+                    *ngFor="let difficulty of difficulties"
+                    [value]="difficulty"
+                  >
+                    {{ difficulty }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="mr-3" style="width: 150px" *ngIf="domaines">
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>Filtrer par Domaine :</mat-label>
+                <mat-select
+                  [(ngModel)]="fiterDomain"
+                  (selectionChange)="filterQuestion()"
+                >
+                  <mat-option [value]="''"
+                    >-- Sélectionner le domaine --</mat-option
+                  >
+                  <mat-option *ngFor="let domain of domaines" [value]="domain">
+                    {{ domain }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr class="text-center">
+                <th scope="col">Titre</th>
+                <th scope="col">Type</th>
+                <th scope="col">Domaine</th>
+                <th scope="col">Difficulté</th>
+                <th scope="col">Detailles</th>
+              </tr>
+            </thead>
+            <ng-container
+              *ngIf="pagedQuestions.length === 0; else questionTech"
+            >
+              <tr>
+                <td colspan="5" style="text-align: center">
+                  <img
+                    src="../../../../../assets/img/brand/Questions-bro.png"
+                    alt="Image si le tableau est vide"
+                    style="width: 30%; height: 30%; display: inline-block"
+                  />
+                </td>
+              </tr>
+            </ng-container>
+            <ng-template #questionTech>
+              <tbody>
+                <tr *ngFor="let question of pagedQuestions">
+                  <td>{{ question.title }}</td>
+                  <td style="text-align: center">{{ question.type.name }}</td>
+                  <td style="text-align: center">{{ question.domain.name }}</td>
+                  <td style="text-align: center">{{ question.difficulty }}</td>
+                  <td class="d-flex justify-content-center">
+                    <div class="row">
+                      <div
+                        class="col-4 clickable-icon"
+                        (click)="openViewQuestionDialog(question.id)"
+                      >
+                        <i class="fas fa-eye" style="font-size: 18px"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+          <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+              [collectionSize]="totalItems"
+              [(page)]="currentPage"
+              [pageSize]="pageSize"
+              (pageChange)="pageChanged($event)"
+            >
+              <ng-template ngbPageLink let-pageIndex="page">
+                <a class="page-link">{{ pageIndex }}</a>
+              </ng-template>
+            </ngb-pagination>
+
+            <select
+              class="form-select form-control"
+              style="width: auto"
+              [(ngModel)]="pageSize"
+              (ngModelChange)="refreshQuestion()"
+            >
+              <option [ngValue]="5">5 Questions par page</option>
+              <option [ngValue]="10">10 Questions par page</option>
+              <option [ngValue]="50">50 Questions par page</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

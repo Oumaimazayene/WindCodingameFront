@@ -1,0 +1,124 @@
+<form [formGroup]="sendTestForm" (ngSubmit)="sendEmail()">
+  <div class="container pt-4 pb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="card border-0">
+          <div class="card-header pb-2">
+            <span class="close-icon" (click)="closeDialog()"
+              ><i class="fas fa-times"></i
+            ></span>
+            <div class="text-muted text-center mt-2 mb-3">
+              <i class="fa-solid fa-paper-plane mr-3 fa-2x"></i>
+              <h1 class="icon-title">Envoyer Le Test</h1>
+            </div>
+          </div>
+          <div class="card-body px-lg-5 py-lg-5">
+            <label> Nom de Candidat:</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"
+                  ><i class="fas fa-user"></i
+                ></span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="First Name"
+                type="text"
+                formControlName="firstname"
+              />
+            </div>
+            <label> Prénom de Candidat:</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"
+                  ><i class="fas fa-user"></i
+                ></span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Last Name"
+                type="text"
+                formControlName="lastname"
+              />
+            </div>
+            <label> Email de Candidat :</label>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-email-83"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  formControlName="email"
+                  placeholder="Email"
+                  type="email"
+                  aria-label="Email"
+                />
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <div class="row justify-content-center mt-4">
+                <div class="col-lg-12">
+                  <div
+                    class="alert text-danger"
+                    role="alert"
+                    *ngIf="
+                      sendTestForm.get('firstname').dirty &&
+                      sendTestForm.get('firstname').invalid
+                    "
+                  >
+                    Veuillez remplir le nom correctement.
+                  </div>
+                  <div
+                    class="alert text-danger"
+                    role="alert"
+                    *ngIf="
+                      sendTestForm.get('lastname').dirty &&
+                      sendTestForm.get('lastname').invalid
+                    "
+                  >
+                    Veuillez remplir le prénom correctement.
+                  </div>
+                  <div
+                    class="alert text-danger"
+                    role="alert"
+                    *ngIf="
+                      sendTestForm.get('email').dirty &&
+                      sendTestForm.get('email').invalid
+                    "
+                  >
+                    Veuillez remplir l'email correctement.
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center mt-3">
+                <div class="col-auto">
+                  <div class="alert text-danger" [hidden]="!formValid"></div>
+
+                  <button
+                    type="submit"
+                    class="btn en-bouton"
+                    [disabled]="!formValid"
+                  >
+                    Envoyer
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn close-bouton"
+                    (click)="closeDialog()"
+                  >
+                    Annuler
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

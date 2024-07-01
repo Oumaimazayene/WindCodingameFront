@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col" *ngIf="data">
+    <div class="d-flex justify-content-end mb-3">
+      <i
+        class="fas fa-times"
+        (click)="closeDialog()"
+        style="font-size: 18px; cursor: pointer"
+      ></i>
+    </div>
+    <h2 class="mb-0">Modifier un Domaine</h2>
+    <form #domainForm="ngForm">
+      <div class="row mt-3">
+        <div class="col-md-4 mb-3">
+          <label for="name">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            [(ngModel)]="data.name"
+            required
+            #name="ngModel"
+          />
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="text-danger"
+          >
+            <div *ngIf="name.errors.required">Le nom est requis.</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="lang">Language</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lang"
+            name="lang"
+            [(ngModel)]="data.lang"
+            required
+            #lang="ngModel"
+          />
+          <div
+            *ngIf="lang.invalid && (lang.dirty || lang.touched)"
+            class="text-danger"
+          >
+            <div *ngIf="lang.errors.required">Le language est requis.</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="version">Version</label>
+          <input
+            type="text"
+            class="form-control"
+            id="version"
+            name="version"
+            [(ngModel)]="data.version"
+            required
+            #version="ngModel"
+          />
+          <div
+            *ngIf="version.invalid && (version.dirty || version.touched)"
+            class="text-danger"
+          >
+            <div *ngIf="version.errors.required">La version est requise.</div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col text-center">
+          <button
+            type="button"
+            class="en-bouton mr-2"
+            (click)="updateDomain(domainForm)"
+          >
+            Modifier
+          </button>
+          <button type="button" class="close-bouton" (click)="closeDialog()">
+            Annuler
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

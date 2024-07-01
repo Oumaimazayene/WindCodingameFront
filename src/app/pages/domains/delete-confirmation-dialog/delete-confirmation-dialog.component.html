@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Confirmation de suppression</h2>
+<div mat-dialog-content>
+  <h3>Êtes-vous sûr de vouloir supprimer ce domaine ?</h3>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" class="btn btn-primary">
+    Confirmer
+  </button>
+  <button mat-button [mat-dialog-close]="false" class="btn btn-secondary">
+    Annuler
+  </button>
+</div>
+
+<!-- Alertes -->
+<div
+  id="successAlert"
+  class="alert alert-success alert-dismissible fade"
+  role="alert"
+  style="display: none"
+>
+  <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+  <span class="alert-inner--text"
+    ><strong>Success!</strong> Suppression réussie.</span
+  >
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

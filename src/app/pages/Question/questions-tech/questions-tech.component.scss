@@ -1,0 +1,88 @@
+.background-color-wind1 {
+  background-color: #eab308; /* Remplacez XXXXXX par le code couleur de votre choix */
+  color: #ffffff; /* Couleur du texte */
+  border: none; /* Supprime la bordure */
+  /* Autres styles CSS selon vos besoins */
+}
+.updatebtn {
+  background-color: #00095e;
+  color: white; // Couleur du texte
+  padding: 10px 20px; // Rembourrage intérieur du bouton
+  border: none; // Supprime les bordures
+  border-radius: 5px; // Arrondi les coins du bouton
+  cursor: pointer; // Curseur de la souris
+  transition: background-color 0.3s ease; // Animation de transition sur le changement de couleur de fond
+
+  &:hover {
+    background-color: darken(
+      #00095e,
+      10%
+    ); // Assombrir légèrement la couleur au survol
+  }
+
+  &:focus {
+    outline: none; // Supprime la mise en évidence par défaut sur le focus
+  }
+}
+.deletebtn {
+  background-color: #eab308;
+  color: white; // Couleur du texte
+  padding: 10px 20px; // Rembourrage intérieur du bouton
+  border: none; // Supprime les bordures
+  border-radius: 5px; // Arrondi les coins du bouton
+  cursor: pointer; // Curseur de la souris
+  transition: background-color 0.3s ease; // Animation de transition sur le changement de couleur de fond
+
+  &:hover {
+    background-color: darken(
+      #eab308,
+      10%
+    ); // Assombrir légèrement la couleur au survol
+  }
+
+  &:focus {
+    outline: none; // Supprime la mise en évidence par défaut sur le focus
+  }
+}
+
+.clickable-icon {
+  cursor: pointer;
+  color: #0f1129; /* Couleur de l'icône */
+}
+
+.clickable-icon:hover {
+  color: #eab308; /* Couleur de l'icône au survol */
+}
+
+.add-bouton {
+  color: #1c1c2b;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+
+  background-color: #eab308;
+}
+
+.add-bouton:hover {
+  background-color: #eab308;
+}
+.full-screen-dialog {
+  overflow-y: hidden; /* Empêcher le défilement vertical */
+  max-height: 100vh; /* Hauteur maximale égale à la hauteur de la fenêtre */
+  max-width: 100vw; /* Largeur maximale égale à la largeur de la fenêtre */
+}
+.centered-dialog {
+  overflow-y: auto; /* Activer le défilement vertical si nécessaire */
+  max-height: 80vh; /* Hauteur maximale à 80% de la fenêtre */
+  max-width: 80vw; /* Largeur maximale à 80% de la fenêtre */
+  margin: auto; /* Centrer la boîte de dialogue horizontalement */
+  top: 0; /* Centrer la boîte de dialogue verticalement */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translate(0, 0); /* Centrer la boîte de dialogue verticalement */
+}

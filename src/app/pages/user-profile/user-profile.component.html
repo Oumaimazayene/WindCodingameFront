@@ -1,0 +1,245 @@
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 600px;
+    background-image: url(assets/img/brand/couverture.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
+  <span class="mask opacity-8"></span>
+  <div class="container-fluid align-items-center">
+    <div class="row">
+      <div class="col-lg-7 col-md-10">
+        <h1
+          class="display-2"
+          *ngIf="user"
+          style="color: #1c1c2b; font-weight: bold"
+        >
+          Hello {{ user?.firstname }}.{{ user?.lastname }}
+        </h1>
+        <h3 class="mt-0 mb-5" *ngIf="user" style="color: #1c1c2b">
+          Prêt à découvrir de nouveaux talents ? C'est ici que ça se passe !
+          Explorez, interagissez et trouvez les perles rares qui feront briller
+          votre équipe.
+        </h3>
+        <a href="#!" class="btn button-yellow" (click)="toggleShowEdit()"
+          >Edit profile</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0" *ngIf="user">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img
+                  [src]="'http://localhost:8090/image/' + user.logo"
+                  alt="Profile Image"
+                  class="rounded-circle"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between"></div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="row">
+            <div class="col">
+              <div
+                class="card-profile-stats d-flex justify-content-center mt-md-5"
+              >
+                <div>
+                  <span class="heading">22</span>
+                  <span class="description">Tests</span>
+                </div>
+                <div>
+                  <span class="heading">10</span>
+                  <span class="description">Test-Sections</span>
+                </div>
+                <div>
+                  <span class="heading">12</span>
+                  <span class="description">Question-privé</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3>{{ user?.firstname }} {{ user?.lastname }}</h3>
+            <div class="h5 font-weight-300">
+              <i class="ni location_pin mr-2 ni ni-email-83"></i
+              >{{ user?.email }}
+            </div>
+            <div class="h5 font-weight-300">
+              <i class="ni location_pin mr-2 ni ni-mobile-button"></i
+              >{{ user?.numtel }}
+            </div>
+            <div class="h3 mt-4">
+              <i class="ni business_briefcase-24 mr-2"></i>Poste -
+              {{ user?.role?.name }}
+            </div>
+            <div>
+              <i class="ni education_hat mr-2"></i>société-{{
+                user?.societyName
+              }}
+            </div>
+            <hr class="my-4" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 order-xl-1" *ngIf="userUpdate && showEditProfile">
+      <div class="card bg-secondary shadow">
+        <form #userForm="ngForm" (ngSubmit)="updateUser()">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">My account</h3>
+              </div>
+              <div class="col-4 text-right">
+                <button
+                  type="submit"
+                  class="btn btn-default"
+                  style="font-weight: normal"
+                >
+                  Modifier
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="heading-small text-muted mb-4">
+              Informations d'utilisateur
+            </h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name"
+                      >First name</label
+                    >
+                    <input
+                      type="text"
+                      id="input-first-name"
+                      name="firstname"
+                      class="form-control form-control-alternative"
+                      placeholder="First name"
+                      [(ngModel)]="userUpdate.firstname"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-last-name"
+                      >Last name</label
+                    >
+                    <input
+                      type="text"
+                      id="input-last-name"
+                      name="lastname"
+                      class="form-control form-control-alternative"
+                      placeholder="Last name"
+                      [(ngModel)]="userUpdate.lastname"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-phone-number"
+                      >Numéro-téléphone</label
+                    >
+                    <input
+                      type="text"
+                      id="input-phone-number"
+                      name="numtel"
+                      class="form-control form-control-alternative"
+                      placeholder="Phone number"
+                      [(ngModel)]="userUpdate.numtel"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-societyName"
+                      >Nom de la société</label
+                    >
+                    <input
+                      type="text"
+                      id="input-societyName"
+                      name="societyName"
+                      class="form-control form-control-alternative"
+                      placeholder="Society Name"
+                      [(ngModel)]="userUpdate.societyName"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="form-group">
+                    <label
+                      class="form-control-label"
+                      for="input-matricule_fiscale"
+                      >Matricule fiscale</label
+                    >
+                    <input
+                      type="text"
+                      id="input-matricule_fiscale"
+                      name="matricule_fiscale"
+                      class="form-control form-control-alternative"
+                      placeholder="Matricule fiscale"
+                      [(ngModel)]="userUpdate.matricule_fiscale"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="logoPicture"
+                    >Changer le logo de la société :</label
+                  >
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input
+                        type="file"
+                        id="logoPicture"
+                        class="custom-file-input"
+                        (change)="onLogoFileSelected($event)"
+                        accept="image/*"
+                      />
+                      <label class="custom-file-label" for="logoPicture">
+                        <!-- Icône d'image -->
+                        <i class="fas fa-image"></i> Choisir un fichier
+                      </label>
+                    </div>
+                  </div>
+                  <div *ngIf="logoImage">
+                    <img
+                      [src]="logoImage"
+                      alt="Logo"
+                      class="mr-2 custom-image"
+                      style="width: 100px; height: auto"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

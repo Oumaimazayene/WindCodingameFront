@@ -1,0 +1,38 @@
+.mat-toolbar {
+  height: 64px;
+  padding: 0 16px;
+  background-color: #1c1c2b;
+  .toolbar-logo {
+    height: 32px;
+    margin-right: 12px;
+  }
+
+  .toolbar-space {
+    flex: 1;
+  }
+}
+.add-bouton {
+  color: #1c1c2b;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+
+  background-color: #efcc0b;
+}
+.button-yellow {
+  background-color: #1c1c2b; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none; /* Suppression de la bordure */
+  padding: 10px 20px; /* Espacement intérieur */
+  font-size: 16px; /* Taille de la police */
+  cursor: pointer; /* Curseur pointeur */
+  transition: background-color 0.3s ease; /* Transition fluide lors du survol */
+  border-radius: 9999px; /* Forme arrondie */
+}
+
+.button-yellow:hover {
+  background-color: goldenrod; /* Changement de couleur au survol */
+}

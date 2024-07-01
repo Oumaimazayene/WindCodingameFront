@@ -1,0 +1,185 @@
+<h2 mat-dialog-title>Nouveau Section de Test Technique :</h2>
+
+<div mat-dialog-content>
+  <form
+    #testSectionForm="ngForm"
+    (ngSubmit)="createTestSection(testSectionForm)"
+  >
+    <div class="row mt-3">
+      <div class="col-md-3 mb-3">
+        <label for="name">Titre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          [(ngModel)]="newTestSection.testsectionName"
+          required
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="lang">Expérience</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lang"
+          name="lang"
+          required
+          [(ngModel)]="newTestSection.experience"
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="version">Nombre de questions</label>
+        <input
+          type="text"
+          class="form-control"
+          id="version"
+          name="version"
+          required
+          [(ngModel)]="newTestSection.qtsNumber"
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="difficulty">Difficulté</label>
+        <select
+          class="form-select form-control"
+          id="difficulty"
+          name="difficulty"
+          required
+          [(ngModel)]="newTestSection.difficulty"
+        >
+          <option *ngFor="let difficulty of difficulties" [value]="difficulty">
+            {{ difficulty }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <label for="difficulty">Remplir la liste des difficultées : </label>
+
+        <select
+          [(ngModel)]="selectedDifficulty"
+          (change)="onDifficultySelect()"
+          class="form-select form-control"
+        >
+          <option value="">Sélectionnez une difficulté</option>
+          <option *ngFor="let difficulty of difficulties" [value]="difficulty">
+            {{ difficulty }}
+          </option>
+        </select>
+        <br />
+        <div *ngIf="selectedDifficulties.length > 0">
+          <h4>Difficultés sélectionnées :</h4>
+          <ul>
+            <li *ngFor="let selected of selectedDifficulties">
+              {{ selected }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="domain">Remplir la liste des domaines :</label>
+
+        <select
+          [(ngModel)]="selectedDomaine"
+          (change)="onDomainSelect()"
+          class="form-select form-control"
+        >
+          <option value="">Sélectionnez un domaine</option>
+          <option *ngFor="let domaine of domaines" [ngValue]="domaine">
+            {{ domaine.name }}.....{{ domaine.version }}
+          </option>
+        </select>
+        <br />
+        <div *ngIf="selectedDomains.length > 0">
+          <h4>Domaines sélectionnés :</h4>
+          <ul>
+            <li *ngFor="let selected of selectedDomains">{{ selected }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="publicQuestionNumber">Questions publique</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="newQuestionNumber"
+            name="publicQuestionNumber"
+            id="publicQuestionNumber"
+          />
+          <button
+            class="btn btn-outline-secondary ml-2"
+            type="button"
+            (click)="addPublicQuestionNumber()"
+          >
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        <div class="text-danger" *ngIf="showErrorMessage">
+          La somme des questions publiques et privées dépasse le nombre total de
+          questions.
+        </div>
+        <div
+          *ngIf="
+            newTestSection.publicNumber &&
+            newTestSection.publicNumber.length > 0
+          "
+        >
+          <h4>nombres sélectionnées :</h4>
+          <ul>
+            <li *ngFor="let number of newTestSection.publicNumber">
+              {{ number }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <label for="privateQuestionNumber">Questions Privées</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="newprivateQuestion"
+            name="privateQuestionNumber"
+            id="privateQuestionNumber"
+          />
+          <button
+            class="btn btn-outline-secondary ml-2"
+            type="button"
+            (click)="addPrivateQuestionNumber()"
+          >
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        <div class="text-danger" *ngIf="showErrorMessage">
+          La somme des questions publiques et privées dépasse le nombre total de
+          questions.
+        </div>
+        <div
+          *ngIf="
+            newTestSection.privateNumber &&
+            newTestSection.privateNumber.length > 0
+          "
+        >
+          <h4>Nombres sélectionnés :</h4>
+          <ul>
+            <li *ngFor="let number of newTestSection.privateNumber">
+              {{ number }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3 justify-content-center">
+      <div class="col-md-12 text-center">
+        <button type="submit" class="btn en-bouton">Enregistrer</button>
+        <button type="button" class="btn close-bouton" (click)="closeDialog()">
+          Annuler
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

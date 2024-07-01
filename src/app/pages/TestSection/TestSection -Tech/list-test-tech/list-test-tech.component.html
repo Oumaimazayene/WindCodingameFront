@@ -1,0 +1,116 @@
+<div class="pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h2 class="mb-0">Liste des Test Technique</h2>
+          <div class="d-flex justify-content-end">
+            <button
+              type="button"
+              class="add-bouton"
+              (click)="openAddTestTech(testSectionUUID)"
+            >
+              Ajouter un Test
+            </button>
+          </div>
+        </div>
+        <ng-container *ngIf="pagedTests.length === 0; else testTech">
+          <tr>
+            <td colspan="5" style="text-align: center">
+              <img
+                src="../../../../../assets/img/brand/Questions-bro.png"
+                alt="Image si le tableau est vide"
+                style="width: 50%; height: 50%; display: inline-block"
+              />
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #testTech>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Date de création</th>
+                  <th scope="col">Score Total</th>
+                  <th scope="col">Etat</th>
+                  <th scope="col">Voir Détailles</th>
+                  <th scope="" col>Envoyer</th>
+                </tr>
+              </thead>
+              <tbody class="align-items-center">
+                <tr *ngFor="let test of pagedTests">
+                  <td>
+                    {{ formatDate(test.createdAt) }}
+                  </td>
+                  <td>{{ test.scoreTotale }}</td>
+                  <td>
+                    <span
+                      [style.color]="test.isSubmitted ? '#1c1c2b' : '#525f7f '"
+                    >
+                      {{ test.isSubmitted ? "Déjà soumis" : "Pas encore..." }}
+                    </span>
+                  </td>
+
+                  <td class="align-middle text-center">
+                    <a
+                      routerLinkActive="active"
+                      [routerLink]="['/test/détails', test.id]"
+                    >
+                      <i
+                        class="fas fa-info"
+                        style="font-size: 18px; color: #1c1c2b"
+                      ></i>
+                    </a>
+                  </td>
+                  <td class="align-items-center">
+                    <ng-container *ngIf="test.isSubmitted; else notSubmitted">
+                      <i
+                        class="fas fa-check"
+                        style="font-size: 18px; color: #1c1c2b"
+                      ></i>
+                    </ng-container>
+                    <ng-template #notSubmitted>
+                      <i
+                        class="fas fa-share-from-square"
+                        style="font-size: 18px; color: #1c1c2b"
+                        (click)="openDialogToSendEmail(test.id)"
+                      ></i>
+                    </ng-template>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination
+                [collectionSize]="totalItems"
+                [(page)]="currentPage"
+                [pageSize]="pageSize"
+                (pageChange)="pageChanged($event)"
+              >
+                <ng-template ngbPageLink let-pageIndex="page">
+                  <a class="page-link">{{ pageIndex }}</a>
+                </ng-template>
+              </ngb-pagination>
+              <select
+                class="form-select form-control"
+                style="width: auto"
+                [(ngModel)]="pageSize"
+                (ngModelChange)="refreshTest()"
+              >
+                <option [ngValue]="5">5 tests par page</option>
+                <option [ngValue]="10">10 tests par page</option>
+                <option [ngValue]="50">50 tests par page</option>
+              </select>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

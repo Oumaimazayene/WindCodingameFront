@@ -1,0 +1,147 @@
+<div class="container" *ngIf="question">
+  <div class="d-flex justify-content-end mb-3" (click)="closeDialog()">
+    <i class="fas fa-times" style="font-size: 18px; cursor: pointer"></i>
+  </div>
+  <div class="card card-main">
+    <div class="card-header">
+      <span>
+        <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+        <strong> Question Details</strong>
+      </span>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="exampleFormControlInput1" class="form-label">Title</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ question.title }}"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Question Type</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ question.type.name }}"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Question Domain</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ question.domain.name }}..{{
+              question.domain.version
+            }}"
+          />
+        </div>
+      </div>
+
+      <br /><br />
+      <div class="row">
+        <div class="col-md-4">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Question Score</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ question.score }}"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Question Difficulty</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ question.difficulty }}"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Question Time</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ time }}"
+          />
+        </div>
+      </div>
+      <br /><br />
+      <div class="row">
+        <div class="col-md-12">
+          <label for="" class="form-label">Question:</label>
+          <div [innerHTML]="codeBlock"></div>
+        </div>
+      </div>
+      <br /><br />
+      <div class="row">
+        <div class="col-md-6">
+          <div
+            type="button"
+            class="btn btn-show text-center"
+            (click)="toggleAnswerList()"
+            [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseExample"
+          >
+            Voir la liste des Réponse
+          </div>
+        </div>
+        <div class="col-md-6 text-right">
+          <div
+            type="button"
+            class="btn btn-show text-center"
+            mat-button
+            [mat-dialog-close]="false"
+          >
+            <span>retourner</span>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+      <div class="row" *ngIf="showAnswerList">
+        <div class="col-md-12">
+          <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <div class="card" style="overflow-y: auto">
+              <div class="card-body">
+                <div class="card-body">
+                  <div
+                    class="row"
+                    *ngFor="let el of question.answer; let i = index"
+                  >
+                    <div class="col-md-12">
+                      <h3 [style.color]="el.isTrue ? 'green' : 'red'">
+                        Answer {{ i + 1 }}: {{ el.answer }}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="d-flex justify-content-end mb-3">
+    <i
+      class="fa-solid fa-xmark"
+      (click)="closeDialog()"
+      style="font-size: 18px; cursor: pointer"
+    ></i>
+  </div>
+  <div class="card card-main">
+    <div class="card-header">
+      <span>
+        <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+        <strong> Question Details</strong>
+      </span>
+    </div>
+    <div class="card-body">
+      <div class="container" *ngIf="question">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              [value]="question.title"
+              disabled
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Question Type</label>
+            <input
+              type="text"
+              class="form-control"
+              [value]="question.type.name"
+              disabled
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Difficulté</label>
+            <input
+              type="text"
+              class="form-control"
+              [value]="question.difficulty"
+              disabled
+            />
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <label class="form-label">Score</label>
+            <input
+              type="text"
+              class="form-control"
+              [value]="question.score"
+              disabled
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Durée</label>
+            <input
+              type="text"
+              class="form-control"
+              [value]="question.time"
+              disabled
+            />
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label class="form-label">Question Body</label>
+            <textarea
+              class="form-control custom-width"
+              rows="4"
+              [value]="question.questionBody"
+              disabled
+            ></textarea>
+          </div>
+          <div class="col-md-6">
+            <img
+              [src]="'http://localhost:8070/image/' + question.urlimage"
+              alt="Question Image"
+              class="mr-2 custom-image"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Answers</h3>
+            <div *ngIf="question.answer && question.answer.length > 0">
+              <div *ngFor="let answer of question.answer; let i = index">
+                <p>
+                  <span *ngIf="answer.isTrue" class="text-success"
+                    >Answer {{ i + 1 }}:</span
+                  >
+                  <span *ngIf="!answer.isTrue" class="text-danger"
+                    >Answer {{ i + 1 }}:</span
+                  >
+                  {{ answer.answer }}
+                </p>
+              </div>
+            </div>
+            <div *ngIf="!question.answer || question.answer.length === 0">
+              <p>No answers available</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

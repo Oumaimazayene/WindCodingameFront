@@ -1,0 +1,138 @@
+<div class="container scrollable-dialog-content" *ngIf="testSectionDetails">
+  <div class="d-flex justify-content-end mb-3" (click)="closeDialog()">
+    <i class="fas fa-times" style="font-size: 18px"></i>
+  </div>
+  <div class="card card-main">
+    <div class="card-header">
+      <span>
+        <i class="fa fa-info-circle fa-2x mr-3" aria-hidden="true"></i>
+        <strong>
+          Section Technique: {{ testSectionDetails.testsectionName }}</strong
+        >
+      </span>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Expérience</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ testSectionDetails.experience }}"
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Difficulté</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ testSectionDetails.difficulty }}"
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Nombre de Questions
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ testSectionDetails.qtsNumber }}"
+          />
+        </div>
+
+        <div class="col-md-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Date de Création</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            disabled
+            placeholder="{{ formatDate(testSectionDetails.createdAt) }}"
+          />
+        </div>
+      </div>
+
+      <br /><br />
+      <div class="row">
+        <div class="col-md-3">
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light" *ngIf="testSectionDetails">
+                <tr>
+                  <th scope="col">Liste des domaines</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let domain of testSectionDetails.domain">
+                  <td class="text-center">{{ domain.name }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light" *ngIf="testSectionDetails">
+                <tr>
+                  <th scope="col">Liste des difficultés</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let difficulty of testSectionDetails.difficulties">
+                  <td class="text-center">{{ difficulty }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light" *ngIf="testSectionDetails">
+                <tr>
+                  <th scope="col">Questions Publique</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let public of testSectionDetails.publicNumber">
+                  <td class="text-center">{{ public }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light" *ngIf="testSectionDetails">
+                <tr>
+                  <th scope="col">Questions Privées</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let private of testSectionDetails.privateNumber">
+                  <td class="text-center">{{ private }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+    </div>
+  </div>
+</div>
